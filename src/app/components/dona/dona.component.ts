@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ChartData, ChartEvent, ChartType } from 'chart.js';
+import { ChartData, ChartType } from 'chart.js';
 
 
 @Component({
@@ -8,13 +8,13 @@ import { ChartData, ChartEvent, ChartType } from 'chart.js';
   styles: [
   ]
 })
-export class DonaComponent {
+export class DonaComponent{
 
   @Input() title:string = 'sin titulo';
 
   // Doughnut
  @Input('labels') doughnutChartLabels: string[] = [ 'Label1', 'Label2', 'Label3' ];
- @Input('data') doughnutChartData: ChartData<'doughnut'> = {
+ @Input('dataP') doughnutChartData: ChartData<'doughnut'> = {
     labels: this.doughnutChartLabels,
     datasets: [
       { data: [ 350, 450, 100 ],        
@@ -23,6 +23,8 @@ export class DonaComponent {
       hoverBorderColor: ["grey"] }
 
     ]
+
+    
 
   };
   public doughnutChartType: ChartType = 'doughnut';
