@@ -28,6 +28,7 @@
                 <h4 class="card-title">Usuarios</h4>
                 <h6 class="card-subtitle">Usuarios registrados en mi aplicación</h6>
                 <div class="table-responsive">
+                    <table class="table table-bordered">
  
                         <thead>
                             <tr>
@@ -36,7 +37,7 @@
                                 <th>Nombre</th>
                                 <th>Role</th>
                                 <th>Auth</th>
-                                <th class="text-nowrap">Acciones</th>
+                                <th class="text-nowrap text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,6 +54,7 @@
                             </tr>
 
                         </tbody>
+                    </table>
                 </div>
                 <button class="btn btn_secundary">Anterior</button>
                 &nbsp;

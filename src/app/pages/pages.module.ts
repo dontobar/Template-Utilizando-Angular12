@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
-import { AppRoutingModule } from '../app-routing.module'
-import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentsModule } from '../components/components.module';
 
+import { AppRoutingModule } from '../app-routing.module'
+import { ComponentsModule } from '../components/components.module';
+import { PipesModule } from '../pipes/pipes.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -18,11 +18,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
-
-
-
-
-
+import { MedicoComponent } from './mantenimientos/medico.component';
 
 
 
@@ -38,7 +34,8 @@ import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.comp
     PerfilComponent,
     UsuariosComponent,
     MedicosComponent,
-    HospitalesComponent
+    HospitalesComponent,
+    MedicoComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +43,8 @@ import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.comp
     SharedModule,
     AppRoutingModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule
   ],
   exports:[
     DashboardComponent,
