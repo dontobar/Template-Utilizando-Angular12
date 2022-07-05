@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { tap ,map, catchError} from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
@@ -11,20 +11,25 @@ import { LoginForm } from '../interfaces/login-form.interface';
 
 import { Usuario } from '../models/usuario.model';
 
-
-
+declare const google:any;
+declare const gapi:any;
 
 const base_url = environment.base_url;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
+  public auth2!:any;
   public usuario!:Usuario;
 
   constructor(private http:HttpClient,
-              private router:Router) { }
+              private router:Router,
+              private ngZone: NgZone
+              )    { this.googleInit();
+            }
 
   get token():string{
     return localStorage.getItem('token') || '';
@@ -40,9 +45,33 @@ export class UsuarioService {
       }
     }
   }
+
+  googleInit() {
+    
+    return new Promise<void>( resolve =>  {
+      gapi.load('auth2', () => {
+          this.auth2 = gapi.auth2.init({
+          client_id: '336467152360-o1sno0tq30qfpjimdc4ck2hnriljrqjr.apps.googleusercontent.com',
+          cookiepolicy: 'single_host_origin',
+        });
+        resolve();
+      });
+    })
+
+  }
+
+
   logout(){
     localStorage.removeItem('token');
-    this.router.navigateByUrl('/login');
+
+
+    google.accounts.id.revoke(this.usuario.email,()=>{
+
+      this.router.navigateByUrl('/login');
+    })
+
+
+
   }
 
   validarToken():Observable<boolean>{
@@ -95,6 +124,16 @@ export class UsuarioService {
                   })
                 )
   }
+
+  loginGoogle(token:string){
+    return this.http.post(`${base_url}/login/google`,{token})
+      .pipe(
+        tap ((resp:any) =>{
+          localStorage.setItem('token',resp.token)
+        })
+      )
+  }
+
 
   cargarUsuarios(desde: number = 0){
     const url= `${base_url}/usuarios?desde=${desde}`;
