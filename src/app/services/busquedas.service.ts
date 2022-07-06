@@ -37,13 +37,14 @@ export class BusquedasService {
   }
   private tranformarHospitales (resultado:any[]):Hospital[]{
     return resultado;
-    
-
   }
   private tranformarMedicos (resultado:any[]):Medico[]{
-    return resultado;
-    
+    return resultado; 
+  }
 
+  busquedaGlobal(termino:string){
+    const url= `${base_url}/todo/${termino}`;
+    return this.http.get(url,this.headers);
   }
 
   buscar(
